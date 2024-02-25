@@ -22,3 +22,5 @@ Config Files: You'll also notice config files such as next.config.js at the root
 
 ## layouts and pages
 - page.tsx : special next.js file exports a react component. Only this is public
+- layout.tsx : to create UI that is shared between multiple pages, partial rendering!
+
