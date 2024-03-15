@@ -69,10 +69,64 @@ By streaming, you can prevent slow data requests from blocking your whole page. 
 - react group (folder)
 
 ## search + pagination
+
 When to use the useSearchParams() hook vs. the searchParams prop?
 
 You might have noticed you used two different ways to extract search params. Whether you use one or the other depends on whether you're working on the client or the server.
 
 <Search> is a Client Component, so you used the useSearchParams() hook to access the params from the client.
+
 <Table> is a Server Component that fetches its own data, so you can pass the searchParams prop from the page to the component.
 As a general rule, if you want to read the params from the client, use the useSearchParams() hook as this avoids having to go back to the server.
+
+## server actions - https://nextjs.org/learn/dashboard-app/mutating-data
+
+**Chapter Focus: Data Mutation with Next.js**
+
+This chapter dives into how to use Next.js to handle changes to your application's data, such as creating, updating, and deleting information. Key techniques involved are:
+
+- **Server Actions:** Next.js's streamlined way to handle data mutations server-side for enhanced security and performance.
+- **Forms and Form Handling:** HTML forms, their interaction with Server Actions, and how to use React's `action` attribute.
+- **Client-Side Caching with Next.js:** How Next.js caches data for faster access and the `revalidatePath` function to update stale data.
+
+**Key Concepts and Explanations**
+
+1. **Server Actions**
+
+   - **What:** Asynchronous functions executed directly on the server. Perfect for sensitive data operations, secure interactions with databases, and reducing the amount of client-side JavaScript needed.
+   - **Benefits:**
+     - **Security:** Data manipulation happens on the server, reducing vulnerability to attacks like Cross-Site Scripting (XSS).
+     - **Performance:** Offloading data processing to the server can improve app responsiveness.
+     - **Progressive Enhancement:** Forms with Server Actions can work even if JavaScript is disabled.
+   - **Integration:** Server Actions create backend API endpoints automatically, so you don't need to write them manually.
+
+2. **Forms with Server Actions**
+
+   - **The `action` Attribute:** In regular HTML, the `action` attribute in `<form>` points to an API endpoint. In Next.js with Server Actions, it calls the Server Action directly.
+   - **Submitting Data:** Submitting a form invokes the Server Action, which automatically receives a `FormData` object containing the form's data.
+
+3. **Data Extraction, Validation, and Transformation**
+
+   - **The `formData.get()` Method:** Used to extract values from the `FormData` object in your Server Action.
+   - **Validation with Zod:** Zod is a TypeScript library that simplifies data validation to ensure correct data types before persisting them in your database.
+   - **Preparation for the Database:** Your Server Action likely needs to format data (e.g., converting numerical strings to numbers, storing money in cents for accuracy, and generating dates) before saving.
+
+4. **Inserting Data into the Database**
+
+   - **SQL Queries:** Server Actions interact with databases using SQL queries. Your SQL syntax will depend on the specific database you're using.
+   - **Error Handling:** Production code should always include robust error handling around database operations to handle unexpected issues.
+
+5. **Cache Revalidation with `revalidatePath`**
+
+   - **Why it Matters:** After data changes, your Next.js app needs to refetch updated data from the server.
+   - **How It Works:** `revalidatePath` invalidates the client-side cache for a specific route, ensuring the next visit will fetch fresh data.
+
+6. **Redirection with `redirect`**
+
+   - **Purpose:** After data changes, it's customary to redirect the user to another page, such as a success message or a list view.
+   - **Functionality:** The `redirect` function handles URL redirection in Server Actions.
+
+**Additional Considerations & Best Practices**
+
+- **Accessibility:** Ensure your forms are accessible by providing labels, appropriate error messages, and good structure for screen readers.
+- **User Experience:** Provide clear feedback mechanisms (loading states, success/error messages) to keep the user informed of the actions' progress.
