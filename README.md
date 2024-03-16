@@ -130,3 +130,18 @@ This chapter dives into how to use Next.js to handle changes to your application
 
 - **Accessibility:** Ensure your forms are accessible by providing labels, appropriate error messages, and good structure for screen readers.
 - **User Experience:** Provide clear feedback mechanisms (loading states, success/error messages) to keep the user informed of the actions' progress.
+
+## A11y
+
+### Server-Side validation
+By validating forms on the server, you can:
+
+Ensure your data is in the expected format before sending it to your database.
+Reduce the risk of malicious users bypassing client-side validation.
+Have one source of truth for what is considered valid data.
+
+
+## auth
+
+What is authentication?
+Authentication is a key part of many web applications today. It's how a system checks if the user is who they say they are.
